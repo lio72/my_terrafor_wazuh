@@ -126,7 +126,7 @@ resource "aws_instance" "bb_indexer_cluser" {
   for_each     = local.instance_wazuh_indexer 
   ami           = "ami-0b0012dad04fbe3d7" 
   key_name      = aws_key_pair.deployer.key_name
-  instance_type = "t4g.medium"
+  instance_type = "t4.medium"
   monitoring    = true
   subnet_id     = each.value.subnet_id
   vpc_security_group_ids = [aws_security_group.wazuh.id]
@@ -146,7 +146,7 @@ resource "aws_instance" "bb_server_cluster" {
   for_each     = local.instance_wazuh_server 
   ami           = "ami-0b0012dad04fbe3d7"
   key_name      = aws_key_pair.deployer.key_name
-  instance_type = "t4g.medium"
+  instance_type = "t4.medium"
   monitoring    = true
   subnet_id     = each.value.subnet_id
   vpc_security_group_ids = [aws_security_group.wazuh.id]
@@ -165,9 +165,9 @@ resource "aws_instance" "bb_server_cluster" {
 resource "aws_instance" "bb_dashboard" {
   ami           = "ami-0b0012dad04fbe3d7"
   key_name      = aws_key_pair.deployer.key_name
-  instance_type = "t4g.medium"
+  instance_type = "t4.medium"
   monitoring    = true
-  subnet_id     = "subnet-067482b924a2e8c3d"
+  subnet_id     = "subnet-015774f3e2f32a2e8"
   vpc_security_group_ids = [aws_security_group.wazuh.id]
   root_block_device  {
     volume_size = 30
