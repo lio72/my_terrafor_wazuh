@@ -1,7 +1,7 @@
 resource "aws_security_group" "wazuh" {
   name        = "wazuh"
   description = "Allow Wazuh ports"
-  vpc_id      = "vpc-043af9d5ae9af462f"
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "Wazuh agent TCP"

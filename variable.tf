@@ -1,5 +1,10 @@
 # subnet for wazuh
 
+variable "vpc_id" {
+  type = string
+  default =  "vpc-043af9d5ae9af462f"
+}
+
 variable "subnet_ids" {
   type    = list(string)
   default = [
