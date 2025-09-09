@@ -9,6 +9,15 @@ variable "subnet_ids" {
   ]
 }
 
+variable "subnet_az" {
+  type    = list(string)
+  default = [
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d"
+  ]
+}
+
 # variable for wazuh indexer
 
 variable "indexer_instance_names" {
@@ -25,6 +34,7 @@ locals {
     var.indexer_instance_names[idx] => {
       subnet_id = var.subnet_ids[idx]
       name      = var.indexer_instance_names[idx]
+      az        = var.subnet_az[idx]
     }
   }
 }
@@ -45,6 +55,7 @@ locals {
     var.server_instance_names[idx] => {
       subnet_id = var.subnet_ids[idx]
       name      = var.server_instance_names[idx]
+      az        = var.subnet_az[idx]
     }
   }
 }
