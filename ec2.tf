@@ -164,6 +164,7 @@ resource "aws_volume_attachment" "ebs_wi_att" {
   volume_id   = local.volume_id_wi_set[count.index]
   instance_id = local.instance_id_wi_set[count.index]
   force_detach = true
+  depends_on [aws_ebs_volume.aws_ebs_volume_wi, aws_instance.bb_indexer_cluster]
 }
 
 resource "aws_instance" "bb_server_cluster" {
@@ -206,6 +207,7 @@ resource "aws_volume_attachment" "ebs_ws_att" {
   volume_id   = local.volume_id_ws_set[count.index]
   instance_id = local.instance_id_ws_set[count.index]
   force_detach = true
+  depends_on [aws_ebs_volume.aws_ebs_volume_ws, aws_instance.bb_server_cluster]
 }
 
 resource "aws_instance" "bb_dashboard" {
