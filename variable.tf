@@ -1,4 +1,4 @@
-# subnet for wazuh
+# vpc subnet and az for wazuh
 
 variable "vpc_id" {
   type = string
@@ -23,7 +23,7 @@ variable "subnet_az" {
   ]
 }
 
-# variable for wazuh indexer
+# variable for wazuh indexer cluster
 
 variable "indexer_instance_names" {
   type    = list(string)
@@ -45,7 +45,7 @@ locals {
 }
 
 
-# varible for wazuh server
+# varible for wazuh server cluster
 
 variable "server_instance_names" {
   type    = list(string)
@@ -65,7 +65,7 @@ locals {
   }
 }
 
-
+# variable for volume wazuh server attachment
 locals {
   volume_id_ws_set = [for v in aws_ebs_volume.aws_ebs_volume_ws : v.id]
 }
@@ -73,6 +73,7 @@ locals {
 locals {
   instance_id_ws_set = [for v in aws_instance.bb_server_cluster : v.id]
 }
+# variable for volume wazuh indexer  attachment
 
 locals {
   volume_id_wi_set = [for v in aws_ebs_volume.aws_ebs_volume_wi : v.id]
