@@ -122,7 +122,7 @@ resource "aws_key_pair" "deployer" {
   public_key = file("~/.ssh/id_rsa.pub") # Path to your local public key
 }
 
-resource "aws_instance" "bb_indexer_cluser" {
+resource "aws_instance" "bb_indexer_cluster" {
   for_each     = local.instance_wazuh_indexer 
   ami           = "ami-0b0012dad04fbe3d7" 
   key_name      = aws_key_pair.deployer.key_name
