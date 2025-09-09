@@ -146,7 +146,7 @@ resource "aws_instance" "bb_indexer_cluser" {
   }
 }
 
-resource "aws_ebs_volume" "ebs_volume_wi" {
+resource "aws_ebs_volume" "aws_ebs_volume_wi" {
   for_each     = local.instance_wazuh_indexer 
   availability_zone = aws_instance.bb_indexer_cluser.availability_zone
   size              = 40
