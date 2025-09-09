@@ -1,6 +1,6 @@
 #*****************************wazuh server sg*******************************
 
-resource "aws_security_group" "wazuh_server" {
+resource "aws_security_group" "wazuh_server_sg" {
   name        = "bb_wazuh_server_sg"
   description = "Allow  on wazuh server"
   vpc_id      = var.vpc_id
@@ -84,7 +84,7 @@ resource "aws_security_group" "wazuh_server" {
 
 #*****************************wazuh indexer sg*******************************
 
-resource "aws_security_group" "wazuh_indexer" {
+resource "aws_security_group" "wazuh_indexer_sg" {
 
   name        = "bb_wazuh_indexer_sg"
   description = "Allow  on wazuh indexer"
@@ -131,7 +131,7 @@ resource "aws_security_group" "wazuh_indexer" {
 
 #*****************************wazuh dashboard sg*******************************
 
-resource "aws_security_group" "wazuh_indexer" {
+resource "aws_security_group" "wazuh_dashboard_sg" {
 
   name        = "bb_wazuh_dashboard_sg"
   description = "Allow  on wazuh dashboar"

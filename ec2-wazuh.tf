@@ -10,7 +10,7 @@ resource "aws_instance" "bb_indexer_cluster" {
   instance_type = "t3.medium"
   monitoring    = true
   subnet_id     = each.value.subnet_id
-  vpc_security_group_ids = [aws_security_group.wazuh.id]
+  vpc_security_group_ids = [aws_security_group.wazuh_indexer_sg.id]
   root_block_device  {
     volume_size = 40
     volume_type = "gp3"
@@ -55,7 +55,7 @@ resource "aws_instance" "bb_server_cluster" {
   instance_type = "t3.medium"
   monitoring    = true
   subnet_id     = each.value.subnet_id
-  vpc_security_group_ids = [aws_security_group.wazuh.id]
+  vpc_security_group_ids = [aws_security_group.wazuh_server_sg.id]
   root_block_device  {
     volume_size = 30
     volume_type = "gp3"
@@ -97,7 +97,7 @@ resource "aws_instance" "bb_dashboard" {
   instance_type = "t3.medium"
   monitoring    = true
   subnet_id     = "subnet-03ffb42dfb0448a9e"
-  vpc_security_group_ids = [aws_security_group.wazuh.id]
+  vpc_security_group_ids = [aws_security_group.wazuh_dashboard_sg.id]
   root_block_device  {
     volume_size = 30
     volume_type = "gp3"
