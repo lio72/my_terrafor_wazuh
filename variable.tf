@@ -75,3 +75,4 @@ locals {
 
 locals {
   instance_id_wi_set = [for v in aws_instance.bb_indexer_cluster : v.id]
+}
