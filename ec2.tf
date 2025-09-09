@@ -158,7 +158,7 @@ resource "aws_ebs_volume" "aws_ebs_volume_wi" {
 }
 
 resource "aws_volume_attachment" "ebs_wi_att" {
-  count       = 2
+  count       = 3
   device_name = "/dev/xvdf"
   volume_id   = aws_ebs_volume.aws_ebs_volume_wi[count.index].id
   instance_id = aws_instance.bb_indexer_cluser[count.index].id
@@ -189,13 +189,13 @@ resource "aws_instance" "bb_server_cluster" {
 }
 
 resource "aws_ebs_volume" "aws_ebs_volume_ws" {
-  count             = 2
-  availability_zone = aws_instance.bb_server_cluster[count.index].availability_zone
+  for_each     = local.instance_wazuh_server 
+  availability_zone = each.value.subnet_az
   size              = 40
   type              = "gp3"
 
   tags = {
-    Name = "aws_ebs_ws_${count.index + 1}"
+    Name = "aws_ebs_wi_${each.value.subnet_az}"
   }
 }
 
