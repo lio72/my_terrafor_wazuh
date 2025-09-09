@@ -137,8 +137,22 @@ resource "aws_instance" "bb_indexer_cluser" {
     encrypted = true     
   }
 
+  user_data = file("mount-ebs.sh")
+  # Attach the EBS volume after creation
+  depends_on = [aws_ebs_volume.aws_ebs_volume_wi] 
+
   tags = {
     Name = each.value.name
+  }
+}
+
+resource "aws_ebs_volume" "aws_ebs_volume_wi" {
+  availability_zone = "us-east-1a"
+  size              = 50
+  type              = "gp3"
+
+  tags = {
+    Name = "aws_ebs_volume_wi"
   }
 }
 
@@ -156,9 +170,22 @@ resource "aws_instance" "bb_server_cluster" {
     delete_on_termination = true
     encrypted = true     
   }
+  user_data = file("mount-ebs.sh")
 
   tags = {
     Name = each.value.name
+  }
+  # Attach the EBS volume after creation
+  depends_on = [aws_ebs_volume.aws_ebs_volume_ws]  
+}
+
+resource "aws_ebs_volume" "aws_ebs_volume_ws" {
+  availability_zone = "us-east-1a"
+  size              = 40
+  type              = "gp3"
+
+  tags = {
+    Name = "aws_ebs_volume_ws"
   }
 }
 
