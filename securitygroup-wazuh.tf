@@ -14,7 +14,7 @@ resource "aws_security_group" "wazuh_server" {
   }
 
   ingress {
-    description = "Wazuh 22 ansible"
+    description = "22 ansible"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -54,27 +54,6 @@ resource "aws_security_group" "wazuh_server" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-
-  # Optional: Wazuh indexer RESTful API
-  ingress {
-    description = "Wazuh indexer RESTful API"
-    from_port   = 9200
-    to_port     = 9299
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  # Wazuh indexer cluster communication
-  ingress {
-    description = "Wazuh indexer cluster communication"
-    from_port   = 9300
-    to_port     = 9400
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  
-
   # Optional: Syslog
   ingress {
     description = "Syslog TCP"
@@ -111,16 +90,25 @@ resource "aws_security_group" "wazuh_indexer" {
   description = "Allow  on wazuh indexer"
   vpc_id      = var.vpc_id
 
-  # Optional: Wazuh indexer RESTful API
+
   ingress {
-    description = "Wazuh indexer RESTful API"
-    from_port   = 9200
-    to_port     = 9299
+    description = "22 ansible"
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
-  # Wazuh indexer cluster communication
+
+# Optional: Wazuh indexer RESTful API
+  ingress {
+    description = "Wazuh indexer RESTful API"
+    from_port   = 9200
+    to_port     = 9200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+# Wazuh indexer cluster communication  
   ingress {
     description = "Wazuh indexer cluster communication"
     from_port   = 9300
@@ -129,7 +117,7 @@ resource "aws_security_group" "wazuh_indexer" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   
-  # Optional: Syslog
+# Optional: Syslog
   ingress {
     description = "Syslog TCP"
     from_port   = 514
@@ -166,6 +154,15 @@ resource "aws_security_group" "wazuh_indexer" {
   vpc_id      = var.vpc_id
 
   # Optional: Wazuh indexer RESTful API
+
+  ingress {
+    description = "22 ansible"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress {
     description = "Wazuh dashboard"
     from_port   = 443
