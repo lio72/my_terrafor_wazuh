@@ -1,6 +1,8 @@
-resource "aws_security_group" "wazuh" {
-  name        = "wazuh"
-  description = "Allow Wazuh ports"
+#*****************************wazuh server sg*******************************
+
+resource "aws_security_group" "wazuh_server" {
+  name        = "bb_wazuh_server_sg"
+  description = "Allow  on wazuh server"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -12,25 +14,9 @@ resource "aws_security_group" "wazuh" {
   }
 
   ingress {
-    description = "Wazuh 80 ansible"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
     description = "Wazuh 22 ansible"
     from_port   = 22
     to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Wazuh 443 ansible"
-    from_port   = 443
-    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -115,4 +101,77 @@ resource "aws_security_group" "wazuh" {
   tags = {
     Name = "wazuh"
   }
+}
+
+#*****************************wazuh indexer sg*******************************
+
+resource "aws_security_group" "wazuh_indexer" {
+
+  name        = "bb_wazuh_indexer_sg"
+  description = "Allow  on wazuh indexer"
+  vpc_id      = var.vpc_id
+
+  # Optional: Wazuh indexer RESTful API
+  ingress {
+    description = "Wazuh indexer RESTful API"
+    from_port   = 9200
+    to_port     = 9299
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  # Wazuh indexer cluster communication
+  ingress {
+    description = "Wazuh indexer cluster communication"
+    from_port   = 9300
+    to_port     = 9400
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  # Optional: Syslog
+  ingress {
+    description = "Syslog TCP"
+    from_port   = 514
+    to_port     = 514
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "Syslog UDP"
+    from_port   = 514
+    to_port     = 514
+    protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "wazuh"
+  }
+}
+
+#*****************************wazuh dashboard sg*******************************
+
+resource "aws_security_group" "wazuh_indexer" {
+
+  name        = "bb_wazuh_dashboard_sg"
+  description = "Allow  on wazuh dashboar"
+  vpc_id      = var.vpc_id
+
+  # Optional: Wazuh indexer RESTful API
+  ingress {
+    description = "Wazuh dashboard"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 }
