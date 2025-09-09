@@ -158,10 +158,11 @@ resource "aws_ebs_volume" "aws_ebs_volume_wi" {
 }
 
 resource "aws_volume_attachment" "ebs_wi_att" {
-  count       = 
+  count       = 3
   device_name = "/dev/xvdf"
-  volume_id   = local.volume_id_ws_set[count.index]
-  instance_id = local.instance_id_ws_set[count.index]
+
+  volume_id   = local.volume_id_wi_set[count.index]
+  instance_id = local.instance_id_wi_set[count.index]
   force_detach = true
 }
 
@@ -202,8 +203,8 @@ resource "aws_ebs_volume" "aws_ebs_volume_ws" {
 resource "aws_volume_attachment" "ebs_ws_att" {
   count       = 2
   device_name = "/dev/xvdf"
-  volume_id   = aws_ebs_volume.aws_ebs_volume_ws[count.index].id
-  instance_id = aws_instance.bb_server_cluster[count.index].id
+  volume_id   = local.volume_id_ws_set[count.index]
+  instance_id = local.instance_id_ws_set[count.index]
   force_detach = true
 }
 

@@ -68,3 +68,10 @@ locals {
 locals {
   instance_id_ws_set = [for v in aws_instance.bb_server_cluster : v.id]
 }
+
+locals {
+  volume_id_wi_set = [for v in aws_ebs_volume.aws_ebs_volume_wi : v.id]
+}
+
+locals {
+  instance_id_wi_set = [for v in aws_instance.bb_indexer_cluster : v.id]
