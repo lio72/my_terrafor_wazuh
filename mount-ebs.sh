@@ -1,6 +1,6 @@
 #!/bin/bash
 DEVICE="/dev/xvdf"
-MOUNT_POINT="/mnt/data"
+MOUNT_POINT="/var/"
 
 if [ -b $DEVICE ]; then
   if ! file -s $DEVICE | grep -q "filesystem"; then
