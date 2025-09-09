@@ -1,7 +1,7 @@
 resource "aws_security_group" "wazuh" {
   name        = "wazuh"
   description = "Allow Wazuh ports"
-  vpc_id      = "vpc-0c1516a1414edff21"
+  vpc_id      = "vpc-043af9d5ae9af462f"
 
   ingress {
     description = "Wazuh agent TCP"
@@ -194,7 +194,7 @@ resource "aws_instance" "bb_dashboard" {
   key_name      = aws_key_pair.deployer.key_name
   instance_type = "t3.medium"
   monitoring    = true
-  subnet_id     = "subnet-015774f3e2f32a2e8"
+  subnet_id     = "subnet-03ffb42dfb0448a9e"
   vpc_security_group_ids = [aws_security_group.wazuh.id]
   root_block_device  {
     volume_size = 30
