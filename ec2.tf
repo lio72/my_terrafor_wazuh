@@ -147,8 +147,8 @@ resource "aws_instance" "bb_indexer_cluser" {
 }
 
 resource "aws_ebs_volume" "aws_ebs_volume_wi" {
-  count             = 2
-  availability_zone = aws_instance.bb_indexer_cluser[count.index].availability_zone
+  for_each     = local.instance_wazuh_indexer 
+  availability_zone = aws_instance.bb_indexer_cluser.availability_zone
   size              = 40
   type              = "gp3"
 
