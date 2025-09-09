@@ -117,22 +117,6 @@ resource "aws_security_group" "wazuh_indexer" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   
-# Optional: Syslog
-  ingress {
-    description = "Syslog TCP"
-    from_port   = 514
-    to_port     = 514
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    description = "Syslog UDP"
-    from_port   = 514
-    to_port     = 514
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -171,4 +155,7 @@ resource "aws_security_group" "wazuh_indexer" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  tags = {
+    Name = "wazuh"
+  }
 }
