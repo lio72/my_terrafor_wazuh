@@ -147,13 +147,22 @@ resource "aws_instance" "bb_indexer_cluser" {
 }
 
 resource "aws_ebs_volume" "aws_ebs_volume_wi" {
-  availability_zone = "us-east-1a"
-  size              = 50
+  count             = 2
+  availability_zone = aws_instance.bb_indexer_cluser[count.index].availability_zone
+  size              = 40
   type              = "gp3"
 
   tags = {
-    Name = "aws_ebs_volume_wi"
+    Name = "aws_ebs_wi_${count.index + 1}"
   }
+}
+
+resource "aws_volume_attachment" "ebs_wi_att" {
+  count       = 2
+  device_name = "/dev/xvdf"
+  volume_id   = aws_ebs_volume.aws_ebs_volume_wi[count.index].id
+  instance_id = aws_instance.bb_indexer_cluser[count.index].id
+  force_detach = true
 }
 
 resource "aws_instance" "bb_server_cluster" {
@@ -181,7 +190,7 @@ resource "aws_instance" "bb_server_cluster" {
 
 resource "aws_ebs_volume" "aws_ebs_volume_ws" {
   count             = 2
-  availability_zone = aws_instance.ec2[count.index].availability_zone
+  availability_zone = aws_instance.bb_server_cluster[count.index].availability_zone
   size              = 40
   type              = "gp3"
 
@@ -193,7 +202,7 @@ resource "aws_ebs_volume" "aws_ebs_volume_ws" {
 resource "aws_volume_attachment" "ebs_ws_att" {
   count       = 2
   device_name = "/dev/xvdf"
-  volume_id   = aws_ebs_volume.data[count.index].id
+  volume_id   = aws_ebs_volume.aws_ebs_volume_ws[count.index].id
   instance_id = aws_instance.bb_server_cluster[count.index].id
   force_detach = true
 }
