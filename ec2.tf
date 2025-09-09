@@ -148,12 +148,12 @@ resource "aws_instance" "bb_indexer_cluser" {
 
 resource "aws_ebs_volume" "aws_ebs_volume_wi" {
   for_each     = local.instance_wazuh_indexer 
-  availability_zone = each.value.subnet_az
+  availability_zone = each.value.az
   size              = 40
   type              = "gp3"
 
   tags = {
-    Name = "aws_ebs_wi_${each.value.subnet_az}"
+    Name = "aws_ebs_wi_${each.value.az}"
   }
 }
 
@@ -190,12 +190,12 @@ resource "aws_instance" "bb_server_cluster" {
 
 resource "aws_ebs_volume" "aws_ebs_volume_ws" {
   for_each     = local.instance_wazuh_server 
-  availability_zone = each.value.subnet_az
+  availability_zone = each.value.az
   size              = 40
   type              = "gp3"
 
   tags = {
-    Name = "aws_ebs_wi_${each.value.subnet_az}"
+    Name = "aws_ebs_wi_${each.value.az}"
   }
 }
 
