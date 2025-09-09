@@ -158,10 +158,10 @@ resource "aws_ebs_volume" "aws_ebs_volume_wi" {
 }
 
 resource "aws_volume_attachment" "ebs_wi_att" {
-  count       = 3
+  count       = 
   device_name = "/dev/xvdf"
-  volume_id   = local.volume_id_ws_set[(count.index)-1]
-  instance_id = local.instance_id_ws_set[(count.index)-1]
+  volume_id   = local.volume_id_ws_set[count.index]
+  instance_id = local.instance_id_ws_set[count.index]
   force_detach = true
 }
 
