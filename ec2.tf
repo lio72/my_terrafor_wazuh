@@ -180,13 +180,22 @@ resource "aws_instance" "bb_server_cluster" {
 }
 
 resource "aws_ebs_volume" "aws_ebs_volume_ws" {
-  availability_zone = "us-east-1a"
+  count             = 2
+  availability_zone = aws_instance.ec2[count.index].availability_zone
   size              = 40
   type              = "gp3"
 
   tags = {
-    Name = "aws_ebs_volume_ws"
+    Name = "aws_ebs_ws_${count.index + 1}"
   }
+}
+
+resource "aws_volume_attachment" "ebs_ws_att" {
+  count       = 2
+  device_name = "/dev/xvdf"
+  volume_id   = aws_ebs_volume.data[count.index].id
+  instance_id = aws_instance.bb_server_cluster[count.index].id
+  force_detach = true
 }
 
 resource "aws_instance" "bb_dashboard" {
