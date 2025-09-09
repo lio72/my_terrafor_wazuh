@@ -59,3 +59,12 @@ locals {
     }
   }
 }
+
+
+locals {
+  volume_id_ws_set = toset([for v in aws_ebs_volume.aws_ebs_volume_ws : v.id])
+}
+
+locals {
+  instance_id_ws_set = toset([for v in aws_instance.bb_server_cluster : v.id])
+}
