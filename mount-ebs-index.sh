@@ -1,6 +1,6 @@
 #!/bin/bash
 DEVICE="/dev/xvdf"
-MOUNT_POINT="/var/"
+MOUNT_POINT="var/lib/wazuh-indexer"
 
 if [ -b $DEVICE ]; then
   if ! file -s $DEVICE | grep -q "filesystem"; then

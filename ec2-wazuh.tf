@@ -18,7 +18,7 @@ resource "aws_instance" "bb_indexer_cluster" {
     encrypted = true     
   }
 
-  user_data = file("mount-ebs.sh")
+  user_data = file("mount-ebs-index.sh")
   # Attach the EBS volume after creation
   depends_on = [aws_ebs_volume.aws_ebs_volume_wi] 
 
@@ -62,7 +62,7 @@ resource "aws_instance" "bb_server_cluster" {
     delete_on_termination = true
     encrypted = true     
   }
-  user_data = file("mount-ebs.sh")
+  user_data = file("mount-ebs-server.sh")
 
   tags = {
     Name = each.value.name
