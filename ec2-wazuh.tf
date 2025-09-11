@@ -97,6 +97,7 @@ resource "aws_instance" "bb_dashboard" {
   instance_type = "t3.medium"
   monitoring    = true
   subnet_id     = "subnet-0305e7a4a7cd7656a"
+  associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.wazuh_dashboard_sg.id]
   root_block_device  {
     volume_size = 30

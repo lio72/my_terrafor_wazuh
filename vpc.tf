@@ -63,8 +63,6 @@ resource "aws_subnet" "subnet4" {
   vpc_id     = "${aws_vpc.main.id}"
   cidr_block = "10.0.4.0/24"
   availability_zone = "${var.availability_zone2}"
-  associate_public_ip_address = true
-
   tags = {
     Name = "elb-subnet-2"
   }
