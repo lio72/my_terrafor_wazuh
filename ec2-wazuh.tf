@@ -109,15 +109,3 @@ resource "aws_instance" "bb_dashboard" {
     Name = "dashboard"
   }
 }
-
-resource "aws_eip" "my_eip" {
-  instance = aws_instance.bb_dashboard.id
-  vpc      = true
-  # Optionally, you can specify the network interface instead of instance:
-  # network_interface = aws_instance.my_instance.primary_network_interface_id
-  # associate_with_private_ip = "your_instance_private_ip"
-
-  tags = {
-    Name = "My EC2 EIP"
-  }
-}
