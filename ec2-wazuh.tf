@@ -83,7 +83,7 @@ resource "aws_ebs_volume" "aws_ebs_volume_ws" {
 }
 
 resource "aws_volume_attachment" "ebs_ws_att" {
-  count       = 2
+  count       = 3
   device_name = "/dev/xvdf"
   volume_id   = local.volume_id_ws_set[count.index]
   instance_id = local.instance_id_ws_set[count.index]
