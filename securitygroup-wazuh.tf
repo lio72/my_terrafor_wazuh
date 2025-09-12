@@ -163,11 +163,8 @@ resource "aws_security_group" "wazuh_dashboard_sg" {
   }
 
   tags = {
-    Name = "wazuh"
+    Name = "wazuh-dashboard"
   }
 }
 
-  tags = {
-    Name = "wazuh-dashboard-sg"
-  }
-}
+
