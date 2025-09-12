@@ -51,12 +51,13 @@ variable "server_instance_names" {
   type    = list(string)
   default = [
     "bb-wazuh_manager",
-    "bb-wazuh_worker"
+    "bb-wazuh_worker1",
+    "bb-wazuh_worker2"
   ]
 }
 locals {
   instance_wazuh_server = {
-    for idx in range(length(var.subnet_ids)-1) :
+    for idx in range(length(var.subnet_ids)) :
     var.server_instance_names[idx] => {
       subnet_id = var.subnet_ids[idx]
       name      = var.server_instance_names[idx]
