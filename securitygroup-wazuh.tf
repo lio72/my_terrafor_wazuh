@@ -78,7 +78,7 @@ resource "aws_security_group" "wazuh_server_sg" {
   }
 
   tags = {
-    Name = "wazuh"
+    Name = "wazuh-dashboard-sg"
   }
 }
 
@@ -125,7 +125,7 @@ resource "aws_security_group" "wazuh_indexer_sg" {
   }
 
   tags = {
-    Name = "wazuh"
+    Name = "wazuh-index-sg"
   }
 }
 
@@ -155,7 +155,19 @@ resource "aws_security_group" "wazuh_dashboard_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "wazuh"
+  }
+}
+
+  tags = {
+    Name = "wazuh-dashboard-sg"
   }
 }
