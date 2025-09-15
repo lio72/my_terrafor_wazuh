@@ -3,6 +3,8 @@ resource "aws_key_pair" "deployer" {
   public_key = file("~/.ssh/id_rsa.pub") # Path to your local public key
 }
 
+################### wazuh indexer ############################
+
 resource "aws_instance" "bb_indexer_cluster" {
   for_each     = local.instance_wazuh_indexer 
   ami           = "ami-0b0012dad04fbe3d7" 
@@ -48,6 +50,8 @@ resource "aws_volume_attachment" "ebs_wi_att" {
   depends_on = [aws_ebs_volume.aws_ebs_volume_wi, aws_instance.bb_indexer_cluster]
 }
 
+################### wazuh server ############################
+
 resource "aws_instance" "bb_server_cluster" {
   for_each     = local.instance_wazuh_server 
   ami           = "ami-0b0012dad04fbe3d7"
@@ -83,7 +87,7 @@ resource "aws_ebs_volume" "aws_ebs_volume_ws" {
 }
 
 resource "aws_volume_attachment" "ebs_ws_att" {
-  count       = 3
+  count       = 2
   device_name = "/dev/xvdf"
   volume_id   = local.volume_id_ws_set[count.index]
   instance_id = local.instance_id_ws_set[count.index]
