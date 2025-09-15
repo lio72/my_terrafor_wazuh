@@ -2,8 +2,8 @@ resource "aws_lb" "nlb_wazuh" {
   name               = "wazuh-nlb"
   internal           = false
   load_balancer_type = "network"
-  security_groups    = [aws_security_group.wazuh-nlb.id]
-  subnets            = [, aws_subnet.public2.id]
+  security_groups    = [aws_security_group.wazuh-nlb_sg.id]
+  subnets            = ["subnet-04f7bc466430fca7f", "subnet-0a8611f6118f67885", "subnet-05546f7b8f197e3ed"]
 
   enable_deletion_protection = false
 }
