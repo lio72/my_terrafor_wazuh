@@ -78,7 +78,7 @@ resource "aws_lb_target_group_attachment" "atach_1514" {
   target_group_arn = aws_lb_target_group.tg_1514.arn
   target_id        = each.value.id
   port             = 1514
-  depends_on = [aws_instance.instance_wazuh_server]
+  depends_on = [aws_instance.bb_server_cluster]
 }
 
 resource "aws_lb_target_group_attachment" "atach_1515" {
@@ -91,7 +91,7 @@ resource "aws_lb_target_group_attachment" "atach_1515" {
   target_group_arn = aws_lb_target_group.tg_1515.arn
   target_id        = each.value.id
   port             = 1515
-  depends_on = [aws_instance.instance_wazuh_server]
+  depends_on = [aws_instance.bb_server_cluster]
 }
 
 
@@ -105,5 +105,5 @@ resource "aws_lb_target_group_attachment" "atach_55000" {
   target_group_arn = aws_lb_target_group.tg_55000.arn
   target_id        = each.value.id
   port             = 55000
-  depends_on = [aws_instance.instance_wazuh_server]
+  depends_on = [aws_instance.bb_server_cluster]
 }
