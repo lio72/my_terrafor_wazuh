@@ -23,6 +23,14 @@ resource "aws_lb_target_group" "tg_1515" {
   vpc_id   = aws_vpc.main.id
 }
 
+resource "aws_lb_target_group" "tg_55000" {
+  name     = "tg-55000"
+  port     = 55000
+  protocol = "TCP"
+  vpc_id   = aws_vpc.main.id
+}
+
+
 # TLS Listeners with ACM Certificate
 resource "aws_lb_listener" "listener_1514" {
   load_balancer_arn = aws_lb.nlb_wazuh.arn
@@ -43,5 +51,16 @@ resource "aws_lb_listener" "listener_1515" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg_1515.arn
+  }
+}
+
+resource "aws_lb_listener" "listener_55000" {
+  load_balancer_arn = aws_lb.nlb_wazuh.arn
+  port              = 55000
+  protocol          = "TCP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_55000.arn
   }
 }
