@@ -6,6 +6,7 @@ resource "aws_lb" "nlb_wazuh" {
   subnets            = ["subnet-04f7bc466430fca7f", "subnet-0a8611f6118f67885", "subnet-05546f7b8f197e3ed"]
 
   enable_deletion_protection = false
+  depends_on = [aws_security_group.wazuh_nlb_sg]
 }
 
 # Target Groups for ports 1514 and 1515
@@ -77,6 +78,7 @@ resource "aws_lb_target_group_attachment" "atach_1514" {
   target_group_arn = aws_lb_target_group.tg_1514.arn
   target_id        = each.value.id
   port             = 1514
+  depends_on = [aws_instance.instance_wazuh_server]
 }
 
 resource "aws_lb_target_group_attachment" "atach_1515" {
@@ -89,6 +91,7 @@ resource "aws_lb_target_group_attachment" "atach_1515" {
   target_group_arn = aws_lb_target_group.tg_1515.arn
   target_id        = each.value.id
   port             = 1515
+  depends_on = [aws_instance.instance_wazuh_server]
 }
 
 
@@ -102,5 +105,5 @@ resource "aws_lb_target_group_attachment" "atach_55000" {
   target_group_arn = aws_lb_target_group.tg_55000.arn
   target_id        = each.value.id
   port             = 55000
-
+  depends_on = [aws_instance.instance_wazuh_server]
 }
