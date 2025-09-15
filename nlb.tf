@@ -14,21 +14,21 @@ resource "aws_lb_target_group" "tg_1514" {
   name     = "tg-1514"
   port     = 1514
   protocol = "TCP"
-  vpc_id   = aws_vpc.main.id
+  vpc_id   = var.vpc_id
 }
 
 resource "aws_lb_target_group" "tg_1515" {
   name     = "tg-1515"
   port     = 1515
   protocol = "TCP"
-  vpc_id   = aws_vpc.main.id
+  vpc_id   = var.vpc_id
 }
 
 resource "aws_lb_target_group" "tg_55000" {
   name     = "tg-55000"
   port     = 55000
   protocol = "TCP"
-  vpc_id   = aws_vpc.main.id
+  vpc_id   = var.vpc_id
 }
 
 
