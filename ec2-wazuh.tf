@@ -95,38 +95,6 @@ resource "aws_volume_attachment" "ebs_ws_att" {
   depends_on = [aws_ebs_volume.aws_ebs_volume_ws, aws_instance.bb_server_cluster]
 }
 
-#create tg for nlb
-
-
-resource "aws_lb_target_group_attachment" "atach_1514" {
-  # covert a list of instance objects to a map with instance ID as the key, and an instance
-  # object as the value.
-  for_each = {
-    for k, v in aws_instance.bb_server_cluster :
-    k => v
-  }
-  target_group_arn = aws_lb_target_group.nlb_wazuh.arn
-  target_id        = each.value.id
-  port             = 1514
-}
-
-resource "aws_lb_target_group_attachment" "atach_1515" {
-  # covert a list of instance objects to a map with instance ID as the key, and an instance
-  # object as the value.
-  for_each = {
-    for k, v in aws_instance.bb_server_cluster :
-    k => v
-  }
-  target_group_arn = aws_lb_target_group.nlb_wazuh.arn
-  target_id        = each.value.id
-  port             = 1515
-}
-
-resource "aws_lb_target_group_attachment" "attach_wazuh_55000" {
-  target_group_arn = aws_lb_target_group.tg_55000.arn
-  target_id        = module.ec2_wazuh.id
-  port             = 55000
-}
 
 #################wazuh dashboard #####################################
 resource "aws_instance" "bb_dashboard" {

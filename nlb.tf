@@ -64,3 +64,43 @@ resource "aws_lb_listener" "listener_55000" {
     target_group_arn = aws_lb_target_group.tg_55000.arn
   }
 }
+
+# attachement
+
+resource "aws_lb_target_group_attachment" "atach_1514" {
+  # covert a list of instance objects to a map with instance ID as the key, and an instance
+  # object as the value.
+  for_each = {
+    for k, v in aws_instance.bb_server_cluster :
+    k => v
+  }
+  target_group_arn = aws_lb_target_group.tg_1514.arn
+  target_id        = each.value.id
+  port             = 1514
+}
+
+resource "aws_lb_target_group_attachment" "atach_1515" {
+  # covert a list of instance objects to a map with instance ID as the key, and an instance
+  # object as the value.
+  for_each = {
+    for k, v in aws_instance.bb_server_cluster :
+    k => v
+  }
+  target_group_arn = aws_lb_target_group.tg_1515.arn
+  target_id        = each.value.id
+  port             = 1515
+}
+
+
+resource "aws_lb_target_group_attachment" "atach_55000" {
+  # covert a list of instance objects to a map with instance ID as the key, and an instance
+  # object as the value.
+  for_each = {
+    for k, v in aws_instance.bb_server_cluster :
+    k => v
+  }
+  target_group_arn = aws_lb_target_group.tg_55000.arn
+  target_id        = each.value.id
+  port             = 55000
+
+}
