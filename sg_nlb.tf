@@ -1,6 +1,6 @@
 resource "aws_security_group" "wazuh_nlb_sg" {
 
-  name        = "bb_wazuh_dashboard_sg"
+  name        = "bb_wazuh_nlb_sg"
   description = "Allow  on wazuh dashboar"
   vpc_id      = var.vpc_id
 
