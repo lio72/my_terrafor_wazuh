@@ -4,13 +4,13 @@ resource "aws_security_group" "wazuh_server_sg" {
   name        = "bb_wazuh_server_sg"
   description = "Allow  on wazuh server"
   vpc_id      = var.vpc_id
-
+  depends_on = [aws_security_group.wazuh_nlb_sg] 
   ingress {
     description = "Wazuh agent TCP"
     from_port   = 1514
     to_port     = 1514
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
   ingress {
@@ -26,7 +26,7 @@ resource "aws_security_group" "wazuh_server_sg" {
     from_port   = 1514
     to_port     = 1514
     protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
   ingress {
@@ -34,7 +34,7 @@ resource "aws_security_group" "wazuh_server_sg" {
     from_port   = 55000
     to_port     = 55000
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
   ingress {
@@ -42,7 +42,7 @@ resource "aws_security_group" "wazuh_server_sg" {
     from_port   = 1515
     to_port     = 1515
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
   # Optional: Wazuh cluster daemon
