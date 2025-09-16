@@ -26,6 +26,7 @@ resource "aws_security_group" "wazuh_server_sg" {
     from_port   = 1514
     to_port     = 1514
     protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
     security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
@@ -34,6 +35,7 @@ resource "aws_security_group" "wazuh_server_sg" {
     from_port   = 55000
     to_port     = 55000
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
     security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
@@ -42,6 +44,7 @@ resource "aws_security_group" "wazuh_server_sg" {
     from_port   = 1515
     to_port     = 1515
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
     security_groups = [aws_security_group.wazuh_nlb_sg.id]
   }
 
