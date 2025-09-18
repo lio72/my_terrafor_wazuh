@@ -102,7 +102,7 @@ resource "aws_instance" "bb_dashboard" {
   key_name      = aws_key_pair.deployer.key_name
   instance_type = "t3.medium"
   monitoring    = true
-  subnet_id     = "subnet-0ab7f511a504aad0b"
+  subnet_id     = "subnet-024267d66591859d1"
   associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.wazuh_dashboard_sg.id]
   root_block_device  {
