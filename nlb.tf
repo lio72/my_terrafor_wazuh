@@ -3,7 +3,7 @@ resource "aws_lb" "nlb_wazuh" {
   internal           = false
   load_balancer_type = "network"
   security_groups    = [aws_security_group.wazuh_nlb_sg.id]
-  subnets            = ["subnet-047c39c8a5ebbc2de", "subnet-0a07dd34c1f566d9d", "subnet-000db21987d261a0d"]
+  subnets            = ["subnet-0f7d4d4ed9bfc6d2d", "subnet-0e81edceaf37d1b3a", "subnet-02d7a66daadf04888"]
 
   enable_deletion_protection = false
   depends_on = [aws_security_group.wazuh_nlb_sg]
