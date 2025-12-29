@@ -98,7 +98,7 @@ resource "aws_volume_attachment" "ebs_ws_att" {
 
 #################wazuh dashboard #####################################
 resource "aws_instance" "bb_dashboard" {
-  ami           = "ami-0b0012dad04fbe3d7"
+  ami           = "subnet-0122380b56732b123"
   key_name      = aws_key_pair.deployer.key_name
   instance_type = "t3.medium"
   monitoring    = true
