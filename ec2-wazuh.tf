@@ -98,11 +98,11 @@ resource "aws_volume_attachment" "ebs_ws_att" {
 
 #################wazuh dashboard #####################################
 resource "aws_instance" "bb_dashboard" {
-  ami           = "subnet-0122380b56732b123"
+  ami           = "ami-0b0012dad04fbe3d7"
   key_name      = aws_key_pair.deployer.key_name
   instance_type = "t3.medium"
   monitoring    = true
-  subnet_id     = "subnet-02d7a66daadf04888"
+  subnet_id     = "subnet-0122380b56732b123"
   associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.wazuh_dashboard_sg.id]
   root_block_device  {
