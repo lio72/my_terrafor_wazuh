@@ -1,8 +1,14 @@
+variable "vpc_id" {
+  type = string
+  default =  "vpc-0e6f6256107104ff6"
+}
+
 resource "aws_security_group" "wazuh_nlb_sg" {
 
   name        = "bb_wazuh_nlb_sg"
   description = "Allow  on wazuh dashboar"
   vpc_id      = var.vpc_id
+
 
   # Optional: Wazuh indexer RESTful API
 
