@@ -26,4 +26,3 @@ resource "aws_efs_mount_target" "efs-app-test" {
 
   depends_on = [aws_efs_file_system.efs-app-test]
 }
-}
