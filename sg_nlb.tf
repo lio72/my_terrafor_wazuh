@@ -1,6 +1,6 @@
 variable "vpc_id" {
   type = string
-  default =  "vpc-0e6f6256107104ff6"
+  default =  "vpc-04f6b8ccf1ac3a6ec"
 }
 
 resource "aws_security_group" "wazuh_nlb_sg" {
