@@ -26,3 +26,11 @@ resource "aws_efs_mount_target" "efs-app-test" {
 
   depends_on = [aws_efs_file_system.efs-app-test]
 }
+
+resource "aws_efs_backup_policy" "policy" {
+  file_system_id = aws_efs_file_system.efs-app-test.id
+
+  backup_policy {
+    status = "ENABLED"
+  }
+}
